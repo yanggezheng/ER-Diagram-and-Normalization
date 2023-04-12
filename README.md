@@ -16,3 +16,11 @@ The countries table has a foreign key region_id that references the region_id pr
 The country_languages table has foreign keys country_id and language_id that reference the country_id and language_id primary keys in the countries and languages tables, respectively. This allows for the many-to-many relationship between countries and languages, where a country can have many languages and a language can be spoken in many countries.
 
 The country_stats table has a foreign key country_id that references the country_id primary key in the countries table. This enforces the one-to-many relationship between countries and country statistics, where each country can have multiple entries in the country_stats table for different years.
+
+## Part 3: Examine a data set and create a normalized data model to store the data
+![ER Diagram](./img/part3_03_caers_er_diagram.png)
+Each table has a primary key. For example, in the event table, the primary key is report_id.
+
+Foreign keys were added to link the event table to the product, symptom and outcomes tables. Because establishing relationships between the tables and ensure data integrity. For example, in the event table, the report_id column is a foreign key that references the product_code column in the product table.
+
+The event table has a one-to-many relationship with the product, symptom, and outcomes tables.
