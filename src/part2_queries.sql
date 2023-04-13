@@ -13,7 +13,7 @@ limit 5;
 select region_id, count(*) as country_count
 from countries
 group by region_id
-group by country_count desc;
+order by country_count desc;
 5, What is the average area of countries in each region id?
 select regions.region_id, round(avg(countries.area)) as avg_area
 from regions
@@ -74,12 +74,3 @@ union
 select name, national_day
 from countries
 where national_day = (select min(national_day) from countries);
-
-
-
-
-
-
-
-
-

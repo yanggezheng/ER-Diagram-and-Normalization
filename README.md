@@ -17,6 +17,9 @@ The country_languages table has foreign keys country_id and language_id that ref
 
 The country_stats table has a foreign key country_id that references the country_id primary key in the countries table. This enforces the one-to-many relationship between countries and country statistics, where each country can have multiple entries in the country_stats table for different years.
 
+## Part 3: Write a sentence interpreting the results of your queries underneath the pasted output
+From the queries, we got that event_date has missing values, product_type are dependent on product, description are dependent on product_code and we need look at both patient_age and age_units to get the age of the patient.
+
 ## Part 3: Examine a data set and create a normalized data model to store the data
 ![ER Diagram](./img/part3_03_caers_er_diagram.png)
 Each table has a primary key. For example, in the event table, the primary key is report_id.
