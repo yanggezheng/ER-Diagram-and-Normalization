@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS product
     product_code text,
     product text,
     product_id serial,
+    product_type text,
     PRIMARY KEY (product_id)
 );
 
@@ -39,36 +40,23 @@ CREATE TABLE IF NOT EXISTS outcomes_symptom
     symptom_term_id serial
 );
 
-CREATE TABLE IF NOT EXISTS product_type
+CREATE TABLE IF NOT EXISTS event_product
 (
-    product_type_id serial,
-    product_type text,
-    PRIMARY KEY (product_type_id)
+    event_event_id serial,
+    product_product_id serial
 );
 
-ALTER TABLE IF EXISTS event
-    ADD FOREIGN KEY (event_id)
-    REFERENCES product (product_id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
+CREATE TABLE IF NOT EXISTS event_outcomes
+(
+    event_event_id serial,
+    outcomes_outcome_id serial
+);
 
-
-ALTER TABLE IF EXISTS event
-    ADD FOREIGN KEY (event_id)
-    REFERENCES symptom (term_id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
-ALTER TABLE IF EXISTS event
-    ADD FOREIGN KEY (event_id)
-    REFERENCES outcomes (outcome_id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
+CREATE TABLE IF NOT EXISTS event_symptom
+(
+    event_event_id serial,
+    symptom_term_id serial
+);
 
 ALTER TABLE IF EXISTS outcomes_symptom
     ADD FOREIGN KEY (outcomes_outcome_id)
@@ -86,10 +74,49 @@ ALTER TABLE IF EXISTS outcomes_symptom
     NOT VALID;
 
 
-ALTER TABLE IF EXISTS product_type
-    ADD FOREIGN KEY (product_type_id)
+ALTER TABLE IF EXISTS event_product
+    ADD FOREIGN KEY (event_event_id)
+    REFERENCES event (event_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS event_product
+    ADD FOREIGN KEY (product_product_id)
     REFERENCES product (product_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
 
+
+ALTER TABLE IF EXISTS event_outcomes
+    ADD FOREIGN KEY (event_event_id)
+    REFERENCES event (event_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS event_outcomes
+    ADD FOREIGN KEY (outcomes_outcome_id)
+    REFERENCES outcomes (outcome_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS event_symptom
+    ADD FOREIGN KEY (event_event_id)
+    REFERENCES event (event_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS event_symptom
+    ADD FOREIGN KEY (symptom_term_id)
+    REFERENCES symptom (term_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
