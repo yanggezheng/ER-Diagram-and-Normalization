@@ -1,3 +1,4 @@
+
 CREATE TABLE IF NOT EXISTS event
 (
     report_id text,
@@ -6,9 +7,9 @@ CREATE TABLE IF NOT EXISTS event
     patient_age numeric,
     age_units text,
     sex text,
+    event_id serial,
     product_code text,
     product_type text,
-    event_id serial,
     PRIMARY KEY (event_id)
 );
 
@@ -56,6 +57,18 @@ CREATE TABLE IF NOT EXISTS event_symptom
 (
     event_event_id serial,
     symptom_term_id serial
+);
+
+CREATE TABLE IF NOT EXISTS product_symptom
+(
+    product_product_id serial,
+    symptom_term_id serial
+);
+
+CREATE TABLE IF NOT EXISTS product_outcomes
+(
+    product_product_id serial,
+    outcomes_outcome_id serial
 );
 
 ALTER TABLE IF EXISTS outcomes_symptom
@@ -120,3 +133,36 @@ ALTER TABLE IF EXISTS event_symptom
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
+
+
+ALTER TABLE IF EXISTS product_symptom
+    ADD FOREIGN KEY (product_product_id)
+    REFERENCES product (product_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS product_symptom
+    ADD FOREIGN KEY (symptom_term_id)
+    REFERENCES symptom (term_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS product_outcomes
+    ADD FOREIGN KEY (product_product_id)
+    REFERENCES product (product_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS product_outcomes
+    ADD FOREIGN KEY (outcomes_outcome_id)
+    REFERENCES outcomes (outcome_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
