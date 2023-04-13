@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS event
     patient_age numeric,
     age_units text,
     sex text,
+    product_code text,
+    product_type text,
     event_id serial,
     PRIMARY KEY (event_id)
 );
@@ -13,10 +15,8 @@ CREATE TABLE IF NOT EXISTS event
 CREATE TABLE IF NOT EXISTS product
 (
     description text,
-    product_code text,
     product text,
     product_id serial,
-    product_type text,
     PRIMARY KEY (product_id)
 );
 
